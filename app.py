@@ -57,7 +57,6 @@ def movie_get():
         
     return jsonify({'result':all_movies})
  
-
 @app.route("/view/<id>", methods=["GET"])
 def one_find_movie(id):
     

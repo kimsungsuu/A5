@@ -10,11 +10,6 @@
     <div class="container" id="card-box">
   <h1>제목 : {{ movie['title'] }}</h1>
   <img src="{{ movie['image'] }}" alt="image" style="max-width: 200px; height: auto;">
-  <p>
-    {% for _ in range(int(movie['star'])) %}
-      ⭐
-    {% endfor %}
-  </p>
   <p>내용 : {{ movie['desc'] }}</p>
   <p>리뷰 : {{ movie['comment'] }}</p>
 </div>
