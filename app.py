@@ -63,8 +63,10 @@ def one_find_movie(id):
     
     find_movie = db.movies.find_one({"_id": ObjectId(id)})
     find_movie['_id'] = str(find_movie['_id'])
+    find_movie['star'] = int(find_movie['star'])
 
-    return jsonify({'result':find_movie})
+    return render_template('view.html', movie=find_movie)
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
