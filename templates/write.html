@@ -1,0 +1,28 @@
+<form action="/movies/new" method="post">
+    <div >
+        <label>영화URL</label><br>
+        <input name="url_give">
+    </div>
+
+    <div>
+        <label>별점</label><br>
+        <select name="star_give" class="form-select" id="star">
+            <option selected>-- 선택하기 --</option>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
+    </div>
+    <br><br>
+
+    <div>
+        <label>코멘트</label>
+        <textarea name="comment_give"></textarea>
+    </div>
+    <div >
+        <button type="submit">기록하기</button>
+        <button onclick="location.href='/'">취소</button>
+    </div>
+</form>

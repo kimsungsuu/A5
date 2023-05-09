@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+        $(document).ready(function() {
+          let id = window.location.pathname.split('/').pop();
+          listing(id);
+        });
+      
+        function listing(id) {
+          fetch(`/view/${id}`).then((res) => res.json()).then((data) => {
+              let rows = data['result'];
+              $('#card-box').empty();
+              console.log(rows)
+              let id = rows['_id'];
+              let comment = rows['comment'];
+              let title = rows['title'];
+              let desc = rows['desc'];
+              let image = rows['image'];
+              let star = rows['star'];
+      
+              let star_repeat = '⭐'.repeat(star);
+      
+              let temp_html = `<h1>${title}</h1>
+                                <img src="${image}">
+                                <p>${desc}</p>
+                                <p>${star_repeat}</p>
+                                <p>${comment}</p>`
+
+              $('#card-box').append(temp_html);
+            });
+        }
+      </script>
+
+    <title>상세 페이지</title>
+  </head>
+  <body>
+    <div class="container" id="card-box">
+      <h1>Title</h1>
+      <img src="image_url" alt="image">
+      <p>Description</p>
+      <p>Star Rating</p>
+      <p>Comment</p>
+    </div>
+  </body>
+</html>
