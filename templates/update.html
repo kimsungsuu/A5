@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>상세 페이지</title>
+    <script>
+
+    </script>
+  </head>
+  <body>
+    <form action="/update/{{ find_id['_id'] }}" method="post">
+        <h1>제목 : {{ movie['title'] }}</h1>
+        <img src="{{ movie['image'] }}" alt="image" style="max-width: 200px; height: auto;">
+        <p>내용 : {{ movie['desc'] }}</p>
+      <select name="star_give" class="form-select" id="star">
+        <option selected>평점:
+          {% for i in range(movie['star']|int) %}
+                        ⭐
+          {% endfor %}</option>
+        <option value="1">⭐</option>
+        <option value="2">⭐⭐</option>
+        <option value="3">⭐⭐⭐</option>
+        <option value="4">⭐⭐⭐⭐</option>
+        <option value="5">⭐⭐⭐⭐⭐</option>
+      </select>
+          
+      <div>
+        <label>리뷰 : </label>
+        <textarea name="comment_give">{{ movie['comment'] }}</textarea>  
+      </div>
+    
+      <button type="submit">수정</button>
+      <a href="/view/{{ find_id['_id'] }}">취소</a>
+    </form>
+</body>
+</html>

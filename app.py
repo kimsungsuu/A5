@@ -62,9 +62,36 @@ def one_find_movie(id):
     
     find_movie = db.movies.find_one({"_id": ObjectId(id)})
     find_movie['_id'] = str(find_movie['_id'])
-    find_movie['star'] = int(find_movie['star'])
+    
+    find_id = db.movies.find_one({'_id' : ObjectId(id)},{'id':True})
 
-    return render_template('view.html', movie=find_movie)
+    
+    return render_template('view.html', movie=find_movie, find_id=find_id)
+
+@app.route("/update/<id>", methods=["GET"])
+def update_get(id):
+    
+    find_movie = db.movies.find_one({"_id": ObjectId(id)})
+    find_movie['_id'] = str(find_movie['_id'])
+    
+    find_id = db.movies.find_one({'_id' : ObjectId(id)},{'id':True})
+    
+    return render_template('update.html', movie=find_movie, find_id=find_id)
+
+@app.route("/update/<id>", methods=["POST"])
+def update_post(id):
+    
+    comment_receive = request.form['comment_give']
+    star_receive = request.form['star_give']
+
+    
+    find_movie = db.movies.find_one({"_id": ObjectId(id)})
+    find_movie['_id'] = str(find_movie['_id'])
+    
+    db.movies.update_one({'_id': ObjectId(id)},{'$set':{'comment':comment_receive}})
+    db.movies.update_one({'_id': ObjectId(id)},{'$set':{'star':star_receive}})
+
+    return redirect('/view/' + str(id))
 
 
 if __name__ == '__main__':

@@ -95,7 +95,6 @@
             fetch('/movie').then((res) => res.json()).then((data) => {
                 let rows = data['result']
                 $('#cards-box').empty()
-                console.log(rows)
                 rows.forEach((a) => {
                     let id = a['_id']
                     let comment = a['comment']

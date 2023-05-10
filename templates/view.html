@@ -11,7 +11,15 @@
   <h1>제목 : {{ movie['title'] }}</h1>
   <img src="{{ movie['image'] }}" alt="image" style="max-width: 200px; height: auto;">
   <p>내용 : {{ movie['desc'] }}</p>
+  <p>평점 :
+    {% for i in range(movie['star']|int) %}
+        ⭐
+    {% endfor %}
+</p>
   <p>리뷰 : {{ movie['comment'] }}</p>
 </div>
-  </body>
+
+<a href="/update/{{ find_id['_id'] }}">수정</a>
+ <button onclick="location.href='/'">목록</button>
+</body>
 </html>
