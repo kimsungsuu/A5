@@ -7,7 +7,7 @@
     </script>
   </head>
   <body>
-    <form action="/update/{{ find_id['_id'] }}" method="post">
+    <form action="/update/{{ movie['_id'] }}" method="post">
         <h1>제목 : {{ movie['title'] }}</h1>
         <img src="{{ movie['image'] }}" alt="image" style="max-width: 200px; height: auto;">
         <p>내용 : {{ movie['desc'] }}</p>
@@ -29,7 +29,7 @@
       </div>
     
       <button type="submit">수정</button>
-      <a href="/view/{{ find_id['_id'] }}">취소</a>
+      <a href="/view/{{ movie['_id'] }}">취소</a>
     </form>
 </body>
 </html>

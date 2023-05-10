@@ -19,7 +19,8 @@
   <p>리뷰 : {{ movie['comment'] }}</p>
 </div>
 
-<a href="/update/{{ find_id['_id'] }}">수정</a>
+<a href="/update/{{ movie['_id'] }}">수정</a>
+<a href="/delete/{{ movie['_id'] }}">삭제</a>
  <button onclick="location.href='/'">목록</button>
 </body>
 </html>
