@@ -86,9 +86,9 @@ def update_post(id):
 @app.route("/delete/<id>", methods=["GET"])
 def delete_get(id):
     
-    find_id = db.movies.find_one({'_id' : ObjectId(id)},{'id':True})
-    
-    return render_template('delete.html', find_id=find_id)
+    find_movie = db.movies.find_one({"_id": ObjectId(id)})
+        
+    return render_template('delete.html', movie=find_movie)
 
 @app.route("/delete/<id>", methods=["POST"])
 def delete_post(id):
