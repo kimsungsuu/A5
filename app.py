@@ -12,7 +12,8 @@ from bs4 import BeautifulSoup
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    
+   return render_template('index.html')
 
 @app.route("/movies/new", methods=["GET"])
 def get_write():
@@ -76,9 +77,6 @@ def update_post(id):
     
     comment_receive = request.form['comment_give']
     star_receive = request.form['star_give']
-
-    
-    find_movie = db.movies.find_one({"_id": ObjectId(id)})
     
     db.movies.update_one({'_id': ObjectId(id)},{'$set':{'comment':comment_receive}})
     db.movies.update_one({'_id': ObjectId(id)},{'$set':{'star':star_receive}})

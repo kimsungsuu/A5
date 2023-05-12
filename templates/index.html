@@ -17,8 +17,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
     <style>
+        style
+        a:link {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: gray;
+            text-decoration: underline;
+        }
+
         * {
             font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        body {
+            background-color: #1E2022;
         }
 
         .mytitle {
@@ -37,11 +57,12 @@
             justify-content: center;
         }
 
-        .mytitle > button {
+
+        .mytitle>button {
             width: 200px;
             height: 50px;
 
-            background-color: transparent;
+            background-color: #E50914;
             color: white;
 
             border-radius: 50px;
@@ -50,28 +71,36 @@
             margin-top: 10px;
         }
 
-        .mytitle > button:hover {
+        .mytitle>button:hover {
             border: 2px solid white;
         }
 
         .mycomment {
-            color: gray;
+            color: white;
+        }
+
+        #card {
+            border-color: #1E2022;
+            border-radius: 20px;
+        }
+
+        .card-text {
+            color: white;
+        }
+
+        .card-img-top {
+            border-radius: 10px 10px 0 0;
+        }
+
+        .card-body {
+            background-color: #52616B;
+            border-radius: 0 0 10px 10px;
         }
 
         .mycards {
             margin: 20px auto 0px auto;
             width: 95%;
             max-width: 1200px;
-        }
-
-        .mypost {
-            width: 95%;
-            max-width: 500px;
-            margin: 20px auto 0px auto;
-            padding: 20px;
-            box-shadow: 0px 0px 3px 0px gray;
-
-            display: none;
         }
 
         .mybtns {
@@ -82,9 +111,11 @@
 
             margin-top: 20px;
         }
-        .mybtns > button {
+
+        .mybtns>button {
             margin-right: 10px;
         }
+    /style
     </style>
     <script>
         $(document).ready(function(){
@@ -106,7 +137,7 @@
                     let star_repeat = '⭐'.repeat(star)
 
                     let temp_html = `<div class="col">
-                                    <div class="card h-100">
+                                    <div class="card h-100" id="card">
                                         <img src="${image}"
                                             class="card-img-top">
                                         <div class="card-body">

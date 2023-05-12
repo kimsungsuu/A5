@@ -2,14 +2,79 @@
 <html>
   <head>
     <title>상세 페이지</title>
-    <script>
-
-    </script>
+    <style>
+      body {
+        background-color: black;
+        color: white;
+      }
+      
+      form {
+        padding: 20px;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      
+      form h1 {
+        font-size: 32px;
+        margin-top: 0;
+      }
+      
+      form p {
+        font-size: 18px;
+      }
+      
+      form img {
+        display: block;
+        margin: 20px auto;
+        max-width: 250px;
+      }
+      
+      form label {
+        font-size: 18px;
+        margin-top: 10px;
+        display: block;
+      }
+      
+      form textarea {
+        width: 100%;
+        height: 100px;
+        margin-top: 5px;
+        padding: 10px;
+        font-size: 18px;
+        border: 1px solid #ccc;
+        background-color : grey;
+      }
+      
+      form select {
+        margin-top: 10px;
+        font-size: 18px;
+        padding: 10px;
+        border: none;
+        background-color: grey;
+      }
+      
+      form button[type="submit"] {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: red;
+        color: white;
+        font-size: 18px;
+      }
+      
+      form a {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: red;
+        color: white;
+        font-size: 18px;
+      }
+      
+    </style>
   </head>
   <body>
     <form action="/update/{{ movie['_id'] }}" method="post">
         <h1>제목 : {{ movie['title'] }}</h1>
-        <img src="{{ movie['image'] }}" alt="image" style="max-width: 200px; height: auto;">
+        <img src="{{ movie['image'] }}" alt="image">
         <p>내용 : {{ movie['desc'] }}</p>
       <select name="star_give" class="form-select" id="star">
         <option selected>평점:
@@ -21,15 +86,13 @@
         <option value="3">⭐⭐⭐</option>
         <option value="4">⭐⭐⭐⭐</option>
         <option value="5">⭐⭐⭐⭐⭐</option>
-      </select>
-          
-      <div>
-        <label>리뷰 : </label>
-        <textarea name="comment_give">{{ movie['comment'] }}</textarea>  
-      </div>
-    
-      <button type="submit">수정</button>
-      <a href="/view/{{ movie['_id'] }}">취소</a>
-    </form>
-</body>
-</html>
+        </select>
+        <div>
+          <label>리뷰 : </label>
+          <textarea name="comment_give">{{ movie['comment'] }}</textarea>  
+        </div>
+        <button type="submit">수정</button>
+        <a href="/view/{{ movie['_id'] }}">취소</a>
+      </form>
+    </body>
+    </html>

@@ -1,26 +1,194 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>상세 페이지</title>
-    <script>
-
-    </script>
-  </head>
-  <body>
-   <div class="container" id="card-box">
-  <h1>제목 : {{ movie['title'] }}</h1>
-  <img src="{{ movie['image'] }}" alt="image" style="max-width: 200px; height: auto;">
-  <p>내용 : {{ movie['desc'] }}</p>
-  <p>평점 :
-    {% for i in range(movie['star']|int) %}
-        ⭐
-    {% endfor %}
-</p>
-  <p>리뷰 : {{ movie['comment'] }}</p>
-</div>
-
-<a href="/update/{{ movie['_id'] }}">수정</a>
-<a href="/delete/{{ movie['_id'] }}">삭제</a>
- <button onclick="location.href='/'">목록</button>
+<head>
+  <title>Delete Review</title>
+  <!--상단 로고 넣는 부분 -->
+  <link rel="shortcut icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/128/1169/1169097.png">
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      /*스크롤바 없애기*/
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
+      color: #F0F5F9;
+    }
+    * {
+      font-family: 'Gowun Dodum', sans-serif;
+    }
+    /*팝업창*/
+    #popup {
+      display: none;
+      /*숨기기*/
+      margin: 0;
+      padding: 0;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+    }
+    #popmenu {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 200px;
+      text-align: center;
+      background: #1E2022;
+      border: 2px solid #52616B;
+      border-radius: 20px;
+    }
+    #popmenu>#h3-1 {
+      margin-top: 40px;
+      color: #F0F5F9;
+      font-size: 20px;
+    }
+    #popmenu>p,
+    #popmenu>#h3-2 {
+      color: #C9D6DF;
+      margin: 5px;
+      font-size: 15px;
+    }
+    .exit {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      height: 30px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .mainbody {
+      margin: 10px 20px;
+      width: 60%;
+      background-color: #1E2022;
+      border-radius: 10px;
+      border: 2px #52616B solid;
+      box-shadow: 2px 2px 4px grey;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      width: 50%;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .text>p {
+      font-size: 18px;
+    }
+    .bottom_btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .img>img {
+      border: 2px solid #C9D6DF;
+      box-shadow: 2px 2px 4px grey;
+      /*이미지 테두리에 그림자 넣기*/
+    }
+    #delete_btn,
+    #list_btn {
+      background-color: #C9D6DF;
+      font-size: 16px;
+      font-style: bold;
+      color: #E50914;
+      border-radius: 2px;
+      width: 70px;
+      height: 30px;
+      border: 2px solid #E50914;
+      margin: 10px;
+      display: inline-block;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    #skip,
+    #delete>input {
+      background-color: #C9D6DF;
+      font-size: 14px;
+      font-style: bold;
+      color: #E50914;
+      border-radius: 5px;
+      width: 50px;
+      height: 30px;
+      border: 2px solid #E50914;
+      margin: 10px;
+      display: inline-block;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    #delete_btn:hover,
+    #list_btn:hover,
+    #skip:hover,
+    #delete>input:hover {
+      background-color: #E50914;
+      color: #F0F5F9;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    $(document).ready(function () {
+      $("#delete_btn").click(function () {
+        $("#popup").fadeIn();
+        $(".container").fadeOut();
+      });
+    });
+    function popup_close() {
+      $("#popup").fadeOut();
+      $(".container").fadeIn();
+    }
+    function page_out() {
+      $("body").fadeIn(1000);
+      location.href = '/';
+    }
+  </script>
+</head>
+<body>
+  <!-- 팝업창 -->
+  <div id="popup">
+    <div id="popmenu">
+      <h3 id="h3-1">{{ movie['title'] }}</h3>
+      <h3 id="h3-2">{% for i in range(movie['star']|int) %} ⭐ {% endfor %}</h3>
+      <p>정말 삭제하시겠습니까?</p>
+      <div class="exit">
+        <form id="delete" action="/delete/{{ movie['_id'] }}" method="POST">
+          <input type="submit" value="삭제" />
+        </form>
+        <button id="skip" onclick="popup_close()">취소</button>
+      </div>
+    </div>
+  </div>
+  <!-- main 내용 -->
+  <div class="mainbody">
+    <div class="container" id="card-box">
+      <div class="img">
+        <img src="{{ movie['image'] }}" alt="image" style="max-width: 200px; height: auto" />
+      </div>
+      <div class="text">
+        <h1>{{ movie['title'] }}</h1>
+        <p>평점 : {% for i in range(movie['star']|int) %} ⭐ {% endfor %}</p>
+        <p>내용 : {{ movie['desc'] }}</p>
+        <p>리뷰 : {{ movie['comment'] }}</p>
+        <div class="bottom_btn">
+          <button id="delete_btn">삭제</button>
+          <button id="list_btn" onclick="page_out()">목록</button>
+        </div>
+      </div>
+    </div>
+  </div> <!-- mainbody 태그 -->
 </body>
 </html>

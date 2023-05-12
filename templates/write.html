@@ -1,28 +1,181 @@
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous">
+    </script>
+
 <form action="/movies/new" method="post">
-    <div >
-        <label>영화URL</label><br>
-        <input name="url_give">
-    </div>
+    <style>
+        .main_box {
+            width: 50%;
+            height: 500px;
+            color: #F0F5F9;
+            background-color: #1E2022;
+            background-position: center;
+            background-size: cover;
 
-    <div>
-        <label>별점</label><br>
-        <select name="star_give" class="form-select" id="star">
-            <option selected>-- 선택하기 --</option>
-            <option value="1">⭐</option>
-            <option value="2">⭐⭐</option>
-            <option value="3">⭐⭐⭐</option>
-            <option value="4">⭐⭐⭐⭐</option>
-            <option value="5">⭐⭐⭐⭐⭐</option>
-        </select>
-    </div>
-    <br><br>
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
 
-    <div>
-        <label>코멘트</label>
-        <textarea name="comment_give"></textarea>
-    </div>
-    <div >
-        <button type="submit">기록하기</button>
-        <button onclick="location.href='/'">취소</button>
-    </div>
+            border-style: solid;
+            border-color: #181A1C;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 30px;
+        }
+
+        .URL_area {
+            background-color: #eee;
+            border: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 100%;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .form-select {
+            background-color: #eee;
+            border: none;
+            padding: 12px 40px;
+            margin: 8px 0;
+            width: 100%;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .comment_area {
+            width: 500px;
+            height: 100px;
+            resize: none;
+            background-color: #eee;
+            border: none;
+            padding: 12px 22px;
+            margin: 8px 0;
+            width: 100%;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .comment_cnt {
+            position: absolute;
+            color: #757575;
+            font-family: "ht_r";
+            font-size: 15px;
+        }
+
+        .txt {
+            color: #F0F5F9;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .jb {
+            text-align: center;
+        }
+
+        .btn_left {
+            display: block;
+            position: relative;
+            float: left;
+            width: 120px;
+            padding: 0;
+            margin: 10px 20px 10px 0;
+            font-weight: 600;
+            text-align: center;
+            line-height: 50px;
+            color: #F0F5F9;
+            border-radius: 5px;
+            transition: all 0.2s;
+            background: #E50914;
+            border: 0;
+            cursor: pointer;
+        }
+
+        .btn_left:hover {
+            background: #800000;
+        }
+
+        .btn_left:active {
+            transform: scale(0.95);
+        }
+
+
+        .btn_right {
+            display: block;
+            position: relative;
+            float: left;
+            width: 120px;
+            padding: 0;
+            margin: 10px 20px 10px 0;
+            font-weight: 600;
+            text-align: center;
+            line-height: 50px;
+            color: #F0F5F9;
+            border-radius: 5px;
+            transition: all 0.2s;
+            background: #E50914;
+            border: 0;
+            cursor: pointer;
+        }
+
+        .btn_right:hover {
+            background: #800000;
+        }
+
+        .btn_right:active {
+            transform: scale(0.95);
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $('#comment_give').on('keyup', function () {
+                $('#comment_cnt').html("" + $(this).val().length + "/200");
+
+                if ($(this).val().length > 200) {
+                    $(this).val($(this).val().substring(0, 200));
+                    $('#comment_cnt').html("200/200");
+                }
+            });
+        });
+
+    </script>
+
+
+    <body style="background-color:#000"></body>
+    <div class="main_box">
+
+        <div>
+            <input type="text" required class="URL_area" name="url_give" placeholder="영화 URL">
+        </div>
+
+        <div>
+            <select name="star_give" class="form-select" id="star">
+                <option selected class="txt_star" selected disabled hidden>-- 별점 --</option>
+                <option value="1">⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="5">⭐⭐⭐⭐⭐</option>
+            </select>
+        </div>
+        <br><br>
+
+        <a href="#" class="txt">영상은 즐거우셨나요?</a>
+
+        <div>
+
+            <textarea type="text" required maxlength="200" class="comment_area" id="comment_give" name="comment_give"
+                placeholder="감상평을 적어주세요!"></textarea>
+            <div class="comment_cnt" id="comment_cnt">0/200</div>
+
+        </div>
+        <br><br>
+        <div class="jb">
+            <button href="" type="submit" class="btn_left">기록하기</button>
+            <button type="button" onclick="location.href='http://localhost:5000/' " class="btn_right">취소</button>
+        </div>
 </form>
